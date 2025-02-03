@@ -25,6 +25,12 @@ class UserCreateForm(UserCreationForm):
         fields =  UserCreationForm.Meta.fields
 
 
+class UserUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Worker
+        fields = ("username", "first_name", "last_name", "email")
+
+
 class TaskSearchForm(forms.Form):
     team = forms.ChoiceField(choices=TEAM_CHOICES,
                                       required=False,
@@ -51,7 +57,6 @@ class TaskCreateForm(forms.ModelForm):
         widget=forms.CheckboxSelectMultiple,
         required=False,
     )
-
 
     class Meta:
         model = Task

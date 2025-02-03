@@ -1,16 +1,16 @@
 <div class="sidebar" style = "display:flex; flex-direction:column">
-  <button>
-    <a href = "{% url "taskmanager:create_task" %}">Create task</a>
-  </button>
-  <button>
-    <a href = "{% url "taskmanager:task_list" %}">All tasks</a>
-  </button>
-  <button>
-    <a href = "{% url "taskmanager:task_list" %}?assigned_to=me">My tasks</a>
-  </button>
-  <button>
-    <a href = "{% url 'taskmanager:personal_info' %}">Personal information</a>
-  </button>
+  <a href = "{% url "taskmanager:create_task" %}">
+    <button>Create task</button>
+  </a>
+  <a href = "{% url "taskmanager:task_list" %}">
+    <button>All tasks</button>
+  </a>
+  <a href = "{% url "taskmanager:task_list" %}?assigned_to=me">
+    <button>My tasks</button>
+  </a>
+  <a href = "{% url 'taskmanager:personal_info' %}">
+    <button>Personal information</button>
+  </a>
   <form method="POST" action="{% url 'logout' %}">
     {% csrf_token %}
     <button type="submit">Log Out</button>

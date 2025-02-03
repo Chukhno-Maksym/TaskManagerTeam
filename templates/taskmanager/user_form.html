@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+  {% block user_info %}
+    {% include "includes/user_info.html" %}
+  {% endblock %}
+
+  <section style="display: flex">
+    <nav class="sidebar" style="width: 250px">
+      {% block sidebar %}
+        {% include "includes/sidebar.html" %}
+      {% endblock %}
+    </nav>
+    <div>
+      <h1>Update user</h1>
+        <form action="" method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <input type="submit" class="btn btn-primary" value="Submit">
+        </form>
+    </div>
+  </section>
+{% endblock %}

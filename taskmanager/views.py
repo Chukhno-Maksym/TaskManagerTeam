@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from taskmanager.forms import UserCreateForm, TaskSearchForm, TaskCreateForm
+from taskmanager.forms import UserCreateForm, TaskSearchForm, TaskCreateForm, UserUpdateForm
 from taskmanager.models import Task
 
 
@@ -20,9 +20,28 @@ class CreateUserView(generic.CreateView):
     success_url = reverse_lazy("taskmanager:task_list")
 
 
-class UserDetailView(generic.DetailView):
+class UserDetailView(LoginRequiredMixin, generic.DetailView):
     model = get_user_model()
-    template_name = "taskmanager/user_detail.html"
+    template_name = "taskmanager/personal_info.html"
+
+    def get_object(self):
+        return self.request.user
+
+
+class UserDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = get_user_model()
+    template_name = "taskmanager/user_confirm_delete.html"
+    success_url = reverse_lazy("login")
+
+    def get_object(self):
+        return self.request.user
+
+
+class UserUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = get_user_model()
+    form_class = UserUpdateForm
+    template_name = "taskmanager/user_form.html"
+    success_url = reverse_lazy("taskmanager:personal_info")
 
     def get_object(self):
         return self.request.user
@@ -64,9 +83,22 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
 class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
     form_class = TaskCreateForm
-    success_url = reverse_lazy("taskmanager:task_list")
     template_name = "taskmanager/create_task.html"
+    success_url = reverse_lazy("taskmanager:task_list")
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
     model = Task
+
+
+class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Task
+    form_class = TaskCreateForm
+    template_name = "taskmanager/create_task.html"
+    success_url = reverse_lazy("taskmanager:task_list")
+
+
+class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Task
+    template_name = "taskmanager/task_confirm_delete.html"
+    success_url = reverse_lazy("taskmanager:task_list")

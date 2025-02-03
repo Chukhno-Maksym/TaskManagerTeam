@@ -20,6 +20,12 @@
       <p>Email: {{ user.email }}</p>
       <p>Position: {{ user.position.name }}</p>
       <p>Team: {{ user.team.name }}</p>
+      <a href="{% url 'taskmanager:personal_info_update'%}">
+        <button>Update personal information</button>
+      </a>
+      <a href={% url 'taskmanager:personal_info_delete' %}>
+        <button>Delete user</button>
+      </a>
     </div>
 
   </section>
