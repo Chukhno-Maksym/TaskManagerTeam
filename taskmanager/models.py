@@ -10,25 +10,25 @@ PRIORITY_CHOICES = [
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Worker(AbstractUser):
-    position = models.ForeignKey("Position", on_delete=models.PROTECT)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="workers")
-
-
-class TaskType(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=100, unique=True, blank=True, null=True)
 
     def __str__(self):
         return self.name
 
 
 class Position(models.Model):
+    name = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+class Worker(AbstractUser):
+    position = models.ForeignKey(Position, on_delete=models.PROTECT, blank=True, null=True)
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="workers", blank=True, null=True)
+
+
+class TaskType(models.Model):
     name = models.CharField(max_length=255)
 
     def __str__(self):
