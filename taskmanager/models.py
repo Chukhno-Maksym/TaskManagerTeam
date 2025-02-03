@@ -3,6 +3,7 @@ from django.db import models
 
 
 PRIORITY_CHOICES = [
+    ("", "All"),
     ("low", "Low"),
     ("medium", "Medium"),
     ("high", "High"),

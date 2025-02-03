@@ -1,11 +1,12 @@
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
 
-from taskmanager.forms import UserCreateForm
+from taskmanager.forms import UserCreateForm, TaskSearchForm, TaskCreateForm
 from taskmanager.models import Task
 
 
@@ -31,7 +32,42 @@ class CreateUserView(generic.CreateView):
                             kwargs={"username": username})
 
 
-class TaskListView(generic.ListView):
+class TaskListView(LoginRequiredMixin, generic.ListView):
     model = Task
     fields = "__all__"
     template_name = "taskmanager/task_list.html"
+    context_object_name = "tasks"
+
+    def get_queryset(self):
+        queryset = Task.objects.all()
+        search_form = TaskSearchForm(self.request.GET)
+
+        if search_form.is_valid():
+            team = search_form.cleaned_data.get("team")
+            status = search_form.cleaned_data.get("status")
+            priority = search_form.cleaned_data.get("priority")
+
+            if team:
+                queryset = queryset.filter(assignees__team__name=team)
+            if status:
+                queryset = queryset.filter(is_completed=status)
+            if priority:
+                queryset = queryset.filter(priority=priority)
+
+        return queryset.distinct()
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(TaskListView, self).get_context_data(**kwargs)
+        context["search_form"] = TaskSearchForm(self.request.GET)
+        return context
+
+
+class TaskCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Task
+    form_class = TaskCreateForm
+    success_url = reverse_lazy("taskmanager:task_list")
+    template_name = "taskmanager/create_task.html"
+
+
+class TaskDetailView(LoginRequiredMixin, generic.DetailView):
+    model = Task

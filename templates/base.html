@@ -13,8 +13,26 @@
 </header>
 <body>
 <main>
-  {% block content %}
-  {% endblock %}
+
+{% block user_info %}
+  {% include "includes/user_info.html" %}
+{% endblock %}
+
+{% block search_bar %}
+  {% include "includes/search_bar.html" %}
+{% endblock %}
+
+<section style="display: flex">
+  <nav class="sidebar" style="width: 250px;">
+    {% block sidebar %}
+      {% include "includes/sidebar.html" %}
+    {% endblock %}
+  </nav>
+  <div class="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+</section>
 </main>
 </body>
 </html>
