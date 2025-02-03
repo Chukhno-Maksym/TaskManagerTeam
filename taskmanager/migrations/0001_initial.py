@@ -73,18 +73,18 @@ class Migration(migrations.Migration):
                 ('is_completed', models.BooleanField(default=False)),
                 ('priority', models.CharField(choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')], default='medium', max_length=10)),
                 ('assignees', models.ManyToManyField(related_name='tasks', to=settings.AUTH_USER_MODEL)),
-                ('task_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='taskmanager.tasktype')),
+                ('task_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='index.html.tasktype')),
             ],
         ),
         migrations.AddField(
             model_name='worker',
             name='position',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='taskmanager.position'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='index.html.position'),
         ),
         migrations.AddField(
             model_name='worker',
             name='team',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='workers', to='taskmanager.team'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='workers', to='index.html.team'),
         ),
         migrations.AddField(
             model_name='worker',
