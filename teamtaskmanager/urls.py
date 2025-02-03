@@ -17,10 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
-from taskmanager.views import CustomLoginView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", include("taskmanager.urls")),
-    path("login/", CustomLoginView.as_view(), name="login"),
+    path("account/",  include("django.contrib.auth.urls")),
 ]

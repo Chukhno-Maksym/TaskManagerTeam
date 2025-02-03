@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import LoginView
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -14,22 +13,19 @@ def start_page(request: HttpRequest) -> HttpResponse:
     return render(request, "taskmanager/index.html")
 
 
-class CustomLoginView(LoginView):
-    def get_success_url(self):
-        username = self.request.user.username
-        return reverse("taskmanager:task_list",
-                       kwargs={"username": username})
-
-
 class CreateUserView(generic.CreateView):
     model = get_user_model()
     form_class = UserCreateForm
     template_name = "taskmanager/create_user.html"
+    success_url = reverse_lazy("taskmanager:task_list")
 
-    def get_success_url(self):
-        username = self.object.username
-        return reverse_lazy("taskmanager:task_list",
-                            kwargs={"username": username})
+
+class UserDetailView(generic.DetailView):
+    model = get_user_model()
+    template_name = "taskmanager/user_detail.html"
+
+    def get_object(self):
+        return self.request.user
 
 
 class TaskListView(LoginRequiredMixin, generic.ListView):
@@ -41,12 +37,15 @@ class TaskListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         queryset = Task.objects.all()
         search_form = TaskSearchForm(self.request.GET)
+        assigned_to = self.request.GET.get("assigned_to")
 
         if search_form.is_valid():
             team = search_form.cleaned_data.get("team")
             status = search_form.cleaned_data.get("status")
             priority = search_form.cleaned_data.get("priority")
 
+            if assigned_to == "me":
+                queryset = queryset.filter(assignees=self.request.user)
             if team:
                 queryset = queryset.filter(assignees__team__name=team)
             if status:

@@ -1,35 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% block user_info %}
+  {% include "includes/user_info.html" %}
+{% endblock %}
+
+{% block search_bar %}
+  {% include "includes/search_bar.html" %}
+{% endblock %}
+
+<section style="display: flex">
+  <nav class="sidebar" style="width: 250px">
+    {% block sidebar %}
+      {% include "includes/sidebar.html" %}
+    {% endblock %}
+  </nav>
 
 
-<h1>Task List</h1>
-  <div class = "task-container">
-      {% for task in tasks %}
-        <table>
-            <tr>
-              <th>Task name:</th>
-              <td>{{ task.name }}</td>
-            </tr>
-            <tr>
-              <th>Assigned to:</th>
-              <td>
-                {% for worker in task.assignees.all %}
-                  <p>{{ worker.username }} [{{ worker.team }}]</p>
-                {% endfor %}
-              </td>
-            </tr>
-            <tr>
-              <th>Task priority:</th>
-              <td>{{ task.priority }}</td>
-            </tr>
-            <tr>
-              <td>
-                <a href = "{% url 'taskmanager:task_detail' pk=task.pk %}">Details</a>
-                <p>Delete</p>
-              </td>
-            </tr>
-        </table>
-      {% endfor %}
+  <div>
+    <div>
+      <h1>Task List</h1>
+    </div>
+    <div class = "task-container">
+        {% for task in tasks %}
+          <table>
+              <tr>
+                <th>Task name:</th>
+                <td>{{ task.name }}</td>
+              </tr>
+              <tr>
+                <th>Assigned to:</th>
+                <td>
+                  {% for worker in task.assignees.all %}
+                    <p>{{ worker.username }} [{{ worker.team }}]</p>
+                  {% endfor %}
+                </td>
+              </tr>
+              <tr>
+                <th>Task priority:</th>
+                <td>{{ task.priority }}</td>
+              </tr>
+              <tr>
+                <td>
+                  <a href = "{% url 'taskmanager:task_detail' pk=task.pk %}">Details</a>
+                  <p>Delete</p>
+                </td>
+              </tr>
+          </table>
+        {% endfor %}
+    </div>
   </div>
+</section>
 {% endblock %}

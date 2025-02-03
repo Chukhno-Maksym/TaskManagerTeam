@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% block user_info %}
+    {% include "includes/user_info.html" %}
+  {% endblock %}
+
+  <section style="display: flex">
+    <nav class="sidebar" style="width: 250px">
+      {% block sidebar %}
+        {% include "includes/sidebar.html" %}
+      {% endblock %}
+    </nav>
+    <div class = "user_information">
+      <h1>User information</h1>
+      <p>Username: {{ user.username }}</p>
+      <p>First name: {{ user.first_name }}</p>
+      <p>Last name: {{ user.last_name }}</p>
+      <p>Email: {{ user.email }}</p>
+      <p>Position: {{ user.position.name }}</p>
+      <p>Team: {{ user.team.name }}</p>
+    </div>
+
+  </section>
+
+{% endblock %}
