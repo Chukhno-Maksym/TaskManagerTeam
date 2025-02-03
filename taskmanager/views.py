@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views import generic
@@ -102,3 +102,22 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Task
     template_name = "taskmanager/task_confirm_delete.html"
     success_url = reverse_lazy("taskmanager:task_list")
+
+
+def detailed_sidebar(request):
+    task_id = request.GET.get("task_id")
+    task_data = []
+
+    if task_id:
+        task = Task.objects.filter(id=task_id).first()
+        if task:
+            workers = [worker.username for worker in task.assignees.all()]
+            task_data.append({
+                "Name": task.name,
+                "Type": task.task_type.name,
+                "Description": task.description,
+                "workers": workers,
+                "Deadline": task.deadline,
+                "Status": task.is_completed,
+            })
+    return JsonResponse({"queryset": task_data})

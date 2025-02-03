@@ -49,3 +49,42 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 .is-hidden {
     display: none;
 }
+
+/*Sidebar*/
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px; /* Скриваємо сайдбар за межі екрану */
+    width: 300px;
+    height: 100%;
+    background-color: #f4f4f4;
+    transition: right 0.3s ease; /* Анімація для відкривання */
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.sidebar.open {
+    right: 0; /* Показуємо сайдбар */
+}
+
+/* Кнопка закриття сайдбару */
+#close-sidebar-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+/* Кнопка для відкриття сайдбару */
+#open-sidebar-btn {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#open-sidebar-btn:hover {
+    background-color: #0056b3;
+}

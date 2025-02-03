@@ -10,11 +10,10 @@
 {% endblock %}
 
 <section style="display: flex">
-  <nav class="sidebar" style="width: 250px">
     {% block sidebar %}
-      {% include "includes/sidebar.html" %}
+      {% include "includes/nav-sidebar.html" %}
+      {% include "includes/details_sidebar.html" %}
     {% endblock %}
-  </nav>
 
 
   <div>
@@ -42,9 +41,10 @@
               </tr>
               <tr>
                 <td>
-                  <a href = "{% url 'taskmanager:task_detail' pk=task.pk %}">Details</a>
-                  <a href = "{% url 'taskmanager:task_update' pk=task.pk %}">Update</a>
-                  <a href = "{% url 'taskmanager:task_delete' pk=task.pk %}">Delete</a>
+{#                  <a href = "{% url 'taskmanager:task_detail' pk=task.pk %}">Details</a>#}
+{#                  <a href = "{% url 'taskmanager:task_update' pk=task.pk %}">Update</a>#}
+{#                  <a href = "{% url 'taskmanager:task_delete' pk=task.pk %}">Delete</a>#}
+                  <button class="open-sidebar-btn" data-task-id="{{ task.pk }}" onclick="getDetails(this)" >Get Task Details</button>
                 </td>
               </tr>
           </table>
