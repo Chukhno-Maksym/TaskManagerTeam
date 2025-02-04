@@ -1,9 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, HttpResponse, JsonResponse
-from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
-from django.views import generic
+from django.http import HttpRequest, HttpResponse,  Http404
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views import generic, View
 
 from taskmanager.forms import UserCreateForm, TaskSearchForm, TaskCreateForm, UserUpdateForm
 from taskmanager.models import Task
@@ -104,20 +104,26 @@ class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("taskmanager:task_list")
 
 
-def detailed_sidebar(request):
-    task_id = request.GET.get("task_id")
-    task_data = []
+class TaskCompleteView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        try:
+            task = Task.objects.get(pk=pk)
+        except Task.DoesNotExist:
+            raise Http404("Task does not exist")
 
-    if task_id:
-        task = Task.objects.filter(id=task_id).first()
-        if task:
-            workers = [worker.username for worker in task.assignees.all()]
-            task_data.append({
-                "Name": task.name,
-                "Type": task.task_type.name,
-                "Description": task.description,
-                "workers": workers,
-                "Deadline": task.deadline,
-                "Status": task.is_completed,
-            })
-    return JsonResponse({"queryset": task_data})
+        task.is_completed = True
+        task.save()
+        return redirect("taskmanager:task_list")
+
+
+class TaskUndoView(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        try:
+            task = Task.objects.get(pk=pk)
+        except Task.DoesNotExist:
+            raise Http404("Task does not exist")
+
+        task.is_completed = False
+        task.save()
+        return redirect("taskmanager:task_list")
+

@@ -1,37 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Task List</h1>
-  <div class = "task-container">
-      <table>
-        <tr>
-          <th>Task name:</th>
-          <td>{{ task.name }}</td>
-        </tr>
-        <tr>
-          <th>Task type:</th>
-          <td>{{ task.task_type.name }}</td>
-        </tr>
-        <tr>
-          <th>Description:</th>
-          <td>{{ task.description }}</td>
-        </tr>
-        <tr>
-          <th>Assigned to:</th>
-          <td>
+  {% block sidebar %}
+    {% include "includes/nav-sidebar.html" %}
+  {% endblock %}
+
+
+  <section class = "task-detail-container">
+    <div class="detailed-task-card">
+      <div class="task-header">
+          <h2>Fix login bug</h2>
+          <span class="task-type">{{ task.name }}</span>
+      </div>
+
+      <div class="task-details">
+          <p><strong>Description: </strong>{{ task.description }}</p>
+          <p><strong>Assigned to :</strong></p>
+          <ul>
             {% for worker in task.assignees.all %}
-              <p>{{ worker.username }} [{{ worker.team }}]</p>
+              <li>{{ worker.username }} <span class="team-tag">[{{ worker.team }}]</span></li>
             {% endfor %}
-          </td>
-        </tr>
-        <tr>
-          <th>Deadline:</th>
-          <td>{{ task.deadline }}</td>
-        </tr>
-        <tr>
-          <th>Status:</th>
-          <td>{{ task.is_completed }}</td>
-        </tr>
-      </table>
-  </div>
+          </ul>
+          <p><strong>Deadline: </strong>{{ task.deadline }}.</p>
+          <p><strong>Status: </strong>{{ task.is_completed }}</p>
+      </div>
+
+      <div class="task-actions">
+          <a href = "{% url 'taskmanager:task_update' pk=task.pk %}">
+            <button class="btn update-btn">Update Task</button>
+          </a>
+          <a href = "{% url 'taskmanager:task_delete' pk=task.pk %}">
+            <button class="btn delete-btn">Delete Task</button>
+          </a>
+      </div>
+    </div>
+  </section>
 {% endblock %}
