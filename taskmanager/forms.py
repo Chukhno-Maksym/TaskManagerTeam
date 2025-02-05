@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
-
 from taskmanager.models import Worker, Task, PRIORITY_CHOICES
+
 
 TEAM_CHOICES = (
     ("","All"),
@@ -11,6 +11,7 @@ TEAM_CHOICES = (
     ("QA Team","QA Team"),
     ("Support Team","Support Team"),
 )
+
 
 STATUS_CHOICES = (
     ("", "All"),
@@ -43,6 +44,7 @@ class TaskSearchForm(forms.Form):
     priority = forms.ChoiceField(choices=PRIORITY_CHOICES,
                                  required=False,
                                  label="Priority",)
+
 
 class TaskCreateForm(forms.ModelForm):
     deadline = forms.DateTimeField(

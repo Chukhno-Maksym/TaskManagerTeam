@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <p>Logged out</p>
-  <a href="{% url 'login' %}">Click to login</a>
+  <div class = "logout">
+    <p>Logged out</p>
+    <a href="{% url 'login' %}" class="btn submit-btn">Click to login</a>
+  </div>
 {% endblock %}

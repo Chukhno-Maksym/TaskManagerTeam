@@ -131,4 +131,3 @@ class TaskUndoView(LoginRequiredMixin, View):
         task.is_completed = False
         task.save()
         return redirect("taskmanager:task_list")
-
