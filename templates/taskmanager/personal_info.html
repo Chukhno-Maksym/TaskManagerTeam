@@ -2,34 +2,32 @@
 
 {% block content %}
 
-    {% block sidebar %}
-      {% include "includes/nav-sidebar.html" %}
-    {% endblock %}
+  {% block sidebar %}
+    {% include "includes/nav-sidebar.html" %}
+  {% endblock %}
 
-  <section class = "personal-info-section">
+  <section class="personal-info-section">
     <div class="user-card">
-        <div class="user-header">
-            <h2>{{ user.username }}</h2>
-            <p class="position">{{ user.position }}</p>
-        </div>
+      <div class="user-header">
+        <h2>{{ user.username }}</h2>
+        <p class="position">{{ user.position }}</p>
+      </div>
 
-        <div class="user-info">
-            <p><strong>First name:</strong> {{ user.first_name }}</p>
-            <p><strong>Last name:</strong> {{ user.last_name }}</p>
-            <p><strong>Email:</strong> {{ user.email }}</p>
-            <p><strong>Team:</strong> {{ user.team }}</p>
-        </div>
+      <div class="user-info">
+        <p><strong>First name:</strong> {{ user.first_name }}</p>
+        <p><strong>Last name:</strong> {{ user.last_name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Team:</strong> {{ user.team }}</p>
+      </div>
 
-        <div class="user-actions">
-          <a href={% url 'taskmanager:personal_info_update' %}>
-            <button class="btn update-btn">Update Personal Information</button>
-          </a>
-          <a href={% url 'taskmanager:personal_info_delete' %}>
-            <button class="btn delete-btn">Delete User</button>
-          </a>
-        </div>
+      <div class="user-actions">
+        <a href={% url 'taskmanager:personal_info_update' %}>
+          <button class="btn update-btn">Update Personal Information</button>
+        </a>
+        <a href={% url 'taskmanager:personal_info_delete' %}>
+          <button class="btn delete-btn">Delete User</button>
+        </a>
+      </div>
     </div>
-
   </section>
-
 {% endblock %}

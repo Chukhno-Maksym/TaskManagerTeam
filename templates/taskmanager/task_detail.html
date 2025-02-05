@@ -6,32 +6,32 @@
   {% endblock %}
 
 
-  <section class = "task-detail-container">
+  <section class="task-detail-container">
     <div class="detailed-task-card">
       <div class="task-header">
-          <h2>Fix login bug</h2>
-          <span class="task-type">{{ task.name }}</span>
+        <h2>Fix login bug</h2>
+        <span class="task-type">{{ task.name }}</span>
       </div>
 
       <div class="task-details">
-          <p><strong>Description: </strong>{{ task.description }}</p>
-          <p><strong>Assigned to :</strong></p>
-          <ul>
-            {% for worker in task.assignees.all %}
-              <li>{{ worker.username }} <span class="team-tag">[{{ worker.team }}]</span></li>
-            {% endfor %}
-          </ul>
-          <p><strong>Deadline: </strong>{{ task.deadline }}.</p>
-          <p><strong>Status: </strong>{{ task.is_completed }}</p>
+        <p><strong>Description: </strong>{{ task.description }}</p>
+        <p><strong>Assigned to :</strong></p>
+        <ul>
+          {% for worker in task.assignees.all %}
+            <li>{{ worker.username }} <span class="team-tag">[{{ worker.team }}]</span></li>
+          {% endfor %}
+        </ul>
+        <p><strong>Deadline: </strong>{{ task.deadline }}.</p>
+        <p><strong>Status: </strong>{{ task.is_completed }}</p>
       </div>
 
       <div class="task-actions">
-          <a href = "{% url 'taskmanager:task_update' pk=task.pk %}">
-            <button class="btn update-btn">Update Task</button>
-          </a>
-          <a href = "{% url 'taskmanager:task_delete' pk=task.pk %}">
-            <button class="btn delete-btn">Delete Task</button>
-          </a>
+        <a href="{% url 'taskmanager:task_update' pk=task.pk %}">
+          <button class="btn update-btn">Update Task</button>
+        </a>
+        <a href="{% url 'taskmanager:task_delete' pk=task.pk %}">
+          <button class="btn delete-btn">Delete Task</button>
+        </a>
       </div>
     </div>
   </section>

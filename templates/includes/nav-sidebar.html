@@ -4,25 +4,25 @@
     <p>{{ user.position.name }}</p>
     <p>{{ user.team.name }}</p>
   </div>
-  <div>
+  <div class="sidebar-links">
     <ul>
       <li>
-        <a href = "{% url "taskmanager:create_task" %}">
+        <a href="{% url "taskmanager:create_task" %}">
           <button class="button nav-button">Create task</button>
         </a>
       </li>
       <li>
-      <a href = "{% url "taskmanager:task_list" %}">
-        <button class="button nav-button">All tasks</button>
-      </a>
+        <a href="{% url "taskmanager:task_list" %}">
+          <button class="button nav-button">All tasks</button>
+        </a>
       </li>
       <li>
-        <a href = "{% url "taskmanager:task_list" %}?assigned_to=me">
+        <a href="{% url "taskmanager:task_list" %}?assigned_to=me">
           <button class="button nav-button">My tasks</button>
         </a>
       </li>
       <li>
-        <a href = "{% url 'taskmanager:personal_info' %}">
+        <a href="{% url 'taskmanager:personal_info' %}">
           <button class="button nav-button">Personal information</button>
         </a>
       </li>

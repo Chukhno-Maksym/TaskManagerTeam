@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class = "container">
-    <div class = "enter-part">
+  <div class="login-container">
+    <div class="enter-part">
       Sing in:
-        <form method="post" action="{% url 'login' %}" >
-          {% csrf_token %}
-          {{ form.as_p }}
-          <input type="submit" value="Submit">
-        </form>
+      <form action="{% url 'login' %}" method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit">
+      </form>
     </div>
   </div>
 {% endblock %}

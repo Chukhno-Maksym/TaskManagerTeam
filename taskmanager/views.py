@@ -1,4 +1,4 @@
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpRequest, HttpResponse,  Http404
 from django.shortcuts import render, redirect
@@ -18,6 +18,11 @@ class CreateUserView(generic.CreateView):
     form_class = UserCreateForm
     template_name = "taskmanager/create_user.html"
     success_url = reverse_lazy("taskmanager:task_list")
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        login(self.request, self.object)
+        return response
 
 
 class UserDetailView(LoginRequiredMixin, generic.DetailView):
