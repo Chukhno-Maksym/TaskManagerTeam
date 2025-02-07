@@ -12,17 +12,17 @@
         </a>
       </li>
       <li>
-        <a href="{% url "taskmanager:task_list" %}">
+        <a href="{% url "taskmanager:tasks" %}">
           <button class="button nav-button">All tasks</button>
         </a>
       </li>
       <li>
-        <a href="{% url "taskmanager:task_list" %}?assigned_to=me">
+        <a href="{% url "taskmanager:tasks" %}?assigned_to=me">
           <button class="button nav-button">My tasks</button>
         </a>
       </li>
       <li>
-        <a href="{% url 'taskmanager:personal_info' %}">
+        <a href="{% url 'taskmanager:user_info' %}">
           <button class="button nav-button">Personal information</button>
         </a>
       </li>

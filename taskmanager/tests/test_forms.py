@@ -3,7 +3,12 @@ from datetime import datetime
 from django.contrib.auth import get_user_model
 from django.test import TestCase
 
-from taskmanager.forms import UserCreateForm, UserUpdateForm, TaskSearchForm, TaskCreateForm
+from taskmanager.forms import (
+    UserCreateForm,
+    UserUpdateForm,
+    TaskSearchForm,
+    TaskCreateForm,
+)
 from taskmanager.models import Worker, TaskType
 
 
@@ -14,7 +19,9 @@ class TestForms(TestCase):
             password="testpassword123",
         )
 
-        self.worker = Worker.objects.create_user(username="worker", password="testpassword123")
+        self.worker = Worker.objects.create_user(
+            username="worker", password="testpassword123"
+        )
         self.task_type = TaskType.objects.create(name="Type")
 
     def test_user_create_form(self):

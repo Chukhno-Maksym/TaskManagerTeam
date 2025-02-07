@@ -1,36 +1,33 @@
-from django.urls import path, include
+from django.urls import path
 
-from taskmanager.views import (start_page,
-                               CreateUserView,
-                               UserDetailView,
-                               UserUpdateView,
-                               UserDeleteView,
-                               TaskListView,
-                               TaskCreateView,
-                               TaskDetailView,
-                               TaskDeleteView,
-                               TaskUpdateView,
-                               TaskCompleteView,
-                               TaskUndoView)
+from taskmanager.views import (
+    index,
+    CreateUserView,
+    UserDetailView,
+    UserUpdateView,
+    UserDeleteView,
+    TaskListView,
+    TaskCreateView,
+    TaskDetailView,
+    TaskDeleteView,
+    TaskUpdateView,
+    TaskCompleteView,
+    TaskUndoView,
+)
 
 urlpatterns = [
-    path("", start_page, name="start_page"),
+    path("", index, name="start_page"),
     path("create/", CreateUserView.as_view(), name="create_user"),
-    path("personal_info/", UserDetailView.as_view(), name="personal_info"),
-    path("personal_info/update/",
-         UserUpdateView.as_view(),
-         name="personal_info_update"),
-
-    path("personal_info/delete/",
-         UserDeleteView.as_view(),
-         name="personal_info_delete"),
-    path("task_list/", TaskListView.as_view(), name="task_list"),
+    path("user/", UserDetailView.as_view(), name="user_info"),
+    path("user/update/", UserUpdateView.as_view(), name="user_update"),
+    path("user/delete/", UserDeleteView.as_view(), name="user_delete"),
+    path("tasks/", TaskListView.as_view(), name="tasks"),
     path("create_task/", TaskCreateView.as_view(), name="create_task"),
     path("task/<int:pk>", TaskDetailView.as_view(), name="task_detail"),
-    path("task/update/<int:pk>", TaskUpdateView.as_view(), name="task_update"),
-    path("task/delete/<int:pk>", TaskDeleteView.as_view(), name="task_delete"),
-    path("complete/<int:pk>", TaskCompleteView.as_view(), name="task_complete"),
-    path("undo/<int:pk>", TaskUndoView.as_view(), name="task_undo"),
+    path("task/<int:pk>/update", TaskUpdateView.as_view(), name="task_update"),
+    path("task<int:pk>/delete/", TaskDeleteView.as_view(), name="task_delete"),
+    path("tasks/<int:pk>/complete", TaskCompleteView.as_view(), name="task_complete"),
+    path("tasks/<int:pk>/undo", TaskUndoView.as_view(), name="task_undo"),
 ]
 
 app_name = "taskmanager"

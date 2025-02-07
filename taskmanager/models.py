@@ -3,7 +3,7 @@ from django.db import models
 
 
 PRIORITY_CHOICES = [
-    ("", "All"),
+    ("", "-----"),
     ("low", "Low"),
     ("medium", "Medium"),
     ("high", "High"),
@@ -11,22 +11,26 @@ PRIORITY_CHOICES = [
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=100, blank=True, null=True)
+    name = models.CharField(max_length=100, blank=False, null=False)
 
     def __str__(self):
         return self.name
 
 
 class Position(models.Model):
-    name = models.CharField(max_length=255, blank=True, null=True)
+    name = models.CharField(max_length=255, blank=False, null=False)
 
     def __str__(self):
         return self.name
 
 
 class Worker(AbstractUser):
-    position = models.ForeignKey(Position, on_delete=models.PROTECT, blank=True, null=True)
-    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name="workers", blank=True, null=True)
+    position = models.ForeignKey(
+        Position, on_delete=models.PROTECT, blank=False, null=False
+    )
+    team = models.ForeignKey(
+        Team, on_delete=models.CASCADE, related_name="workers", blank=False, null=False
+    )
 
 
 class TaskType(models.Model):

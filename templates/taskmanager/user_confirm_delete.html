@@ -9,6 +9,6 @@
       {% csrf_token %}
       <input type="submit" value="Yes, Delete" class="btn delete-btn">
     </form>
-    <a href="{% url 'taskmanager:personal_info' %}" class="btn btn-cancel">Cancel</a>
+    <a href="{% url 'taskmanager:user_info' %}" class="btn btn-cancel">Cancel</a>
   </div>
 {% endblock %}

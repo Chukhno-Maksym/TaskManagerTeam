@@ -1,15 +1,20 @@
 from django.contrib.auth import get_user_model, login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpRequest, HttpResponse,  Http404
+from django.http import HttpRequest, HttpResponse, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import generic, View
 
-from taskmanager.forms import UserCreateForm, TaskSearchForm, TaskCreateForm, UserUpdateForm
+from taskmanager.forms import (
+    UserCreateForm,
+    TaskSearchForm,
+    TaskCreateForm,
+    UserUpdateForm,
+)
 from taskmanager.models import Task
 
 
-def start_page(request: HttpRequest) -> HttpResponse:
+def index(request: HttpRequest) -> HttpResponse:
     return render(request, "taskmanager/index.html")
 
 
@@ -17,7 +22,7 @@ class CreateUserView(generic.CreateView):
     model = get_user_model()
     form_class = UserCreateForm
     template_name = "taskmanager/create_user.html"
-    success_url = reverse_lazy("taskmanager:task_list")
+    success_url = reverse_lazy("taskmanager:tasks")
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -27,7 +32,7 @@ class CreateUserView(generic.CreateView):
 
 class UserDetailView(LoginRequiredMixin, generic.DetailView):
     model = get_user_model()
-    template_name = "taskmanager/personal_info.html"
+    template_name = "taskmanager/user_info.html"
 
     def get_object(self):
         return self.request.user
@@ -46,7 +51,7 @@ class UserUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = get_user_model()
     form_class = UserUpdateForm
     template_name = "taskmanager/user_form.html"
-    success_url = reverse_lazy("taskmanager:personal_info")
+    success_url = reverse_lazy("taskmanager:user_info")
 
     def get_object(self):
         return self.request.user
@@ -89,7 +94,7 @@ class TaskCreateView(LoginRequiredMixin, generic.CreateView):
     model = Task
     form_class = TaskCreateForm
     template_name = "taskmanager/create_task.html"
-    success_url = reverse_lazy("taskmanager:task_list")
+    success_url = reverse_lazy("taskmanager:tasks")
 
 
 class TaskDetailView(LoginRequiredMixin, generic.DetailView):
@@ -100,13 +105,13 @@ class TaskUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Task
     form_class = TaskCreateForm
     template_name = "taskmanager/create_task.html"
-    success_url = reverse_lazy("taskmanager:task_list")
+    success_url = reverse_lazy("taskmanager:tasks")
 
 
 class TaskDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Task
     template_name = "taskmanager/task_confirm_delete.html"
-    success_url = reverse_lazy("taskmanager:task_list")
+    success_url = reverse_lazy("taskmanager:tasks")
 
 
 class TaskCompleteView(LoginRequiredMixin, View):
@@ -118,7 +123,7 @@ class TaskCompleteView(LoginRequiredMixin, View):
 
         task.is_completed = True
         task.save()
-        return redirect("taskmanager:task_list")
+        return redirect("taskmanager:tasks")
 
 
 class TaskUndoView(LoginRequiredMixin, View):
@@ -130,4 +135,4 @@ class TaskUndoView(LoginRequiredMixin, View):
 
         task.is_completed = False
         task.save()
-        return redirect("taskmanager:task_list")
+        return redirect("taskmanager:tasks")
