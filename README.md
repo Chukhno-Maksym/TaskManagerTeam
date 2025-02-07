@@ -22,3 +22,21 @@ assignees, and task_type.
 
 Run tests:
     `python manage.py test`
+
+Create a .env file in the project's root directory and add the following:
+
+Database configuration
+* POSTGRES_DB=<db_name>               # Name of the PostgreSQL database
+* POSTGRES_DB_PORT=<db_port>          # Database port, usually 5432
+* POSTGRES_USER=<db_user>             # PostgreSQL user
+* POSTGRES_PASSWORD=<db_password>     # Database password
+* POSTGRES_HOST=<db_host>             # Database host, usually localhost or a server address
+
+Django settings
+* SECRET_KEY=<secret_key>             # Django secret key for encryption
+* DJANGO_SETTINGS_MODULE=<path_to_settings_file>  # Path to Django settings, e.g., myproject.settings
+* RENDER_EXTERNAL_HOSTNAME=<domain>   # Deployment domain (optional)
+
+You cat use a test user to see the features.
+* login: testuser
+* password: 1qazcde3
