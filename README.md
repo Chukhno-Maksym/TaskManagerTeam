@@ -20,23 +20,55 @@ Models
 * Task: Represents a task with fields like name, description, deadline, is_completed, priority,
 assignees, and task_type.
 
-Run tests:
-    `python manage.py test`
+# Project Setup Instructions
+
+### 1. **Fork the Repository**
+
+- Go to the repository on GitHub.
+- Click the **Fork** button in the upper-right corner to create your own copy of the repository.
+
+### 2. **Clone the Forked Repository**
+
+- Copy the link to your fork by clicking the **Clone or download** button in your repository.
+- Use the following command to clone the repository:
+
+```git clone <link-from-your-forked-repo>```
+
+- Replace <link-from-your-forked-repo> with the copied link.
+
+### Create a Branch for Your Solution and Switch to It
+Open the terminal in your IDE or project directory, and run the following command:
+
+    git checkout -b develop
+
+### Create a Virtual Environment
+If you are using PyCharm - it may propose you to automatically create venv for your project and install requirements in it, but if not:
+
+    python -m venv venv
+    venv\Scripts\activate (on Windows)
+    source venv/bin/activate (on macOS)
+    pip install -r requirements.txt
+
+### Run tests:
+    python manage.py test
 
 Create a .env file in the project's root directory and add the following:
 
-Database configuration
-* POSTGRES_DB=<db_name>               # Name of the PostgreSQL database
-* POSTGRES_DB_PORT=<db_port>          # Database port, usually 5432
-* POSTGRES_USER=<db_user>             # PostgreSQL user
-* POSTGRES_PASSWORD=<db_password>     # Database password
-* POSTGRES_HOST=<db_host>             # Database host, usually localhost or a server address
+### Database configuration
+    POSTGRES_DB=<db_name>               # Name of the PostgreSQL database
+    POSTGRES_DB_PORT=<db_port>          # Database port, usually 5432
+    POSTGRES_USER=<db_user>             # PostgreSQL user
+    POSTGRES_PASSWORD=<db_password>     # Database password
+    POSTGRES_HOST=<db_host>             # Database host, usually localhost or a server address
 
-Django settings
-* SECRET_KEY=<secret_key>             # Django secret key for encryption
-* DJANGO_SETTINGS_MODULE=<path_to_settings_file>  # Path to Django settings, e.g., myproject.settings
-* RENDER_EXTERNAL_HOSTNAME=<domain>   # Deployment domain (optional)
+### Django settings
+    SECRET_KEY=<secret_key>             # Django secret key for encryption
+    DJANGO_SETTINGS_MODULE=<path_to_settings_file>  # Path to Django settings, e.g., myproject.settings
+    RENDER_EXTERNAL_HOSTNAME=<domain>   # Deployment domain (optional)
 
-You cat use a test user to see the features.
+### You can load base data into the database from a fixture using the following command:
+    python manage.py loaddata initial_data.json
+
+### You cat use a test user to see the features.
 * login: testuser
 * password: 1qazcde3
