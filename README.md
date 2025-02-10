@@ -72,3 +72,14 @@ Create a .env file in the project's root directory and add the following:
 ### You cat use a test user to see the features.
 * login: testuser
 * password: 1qazcde3
+
+![img_9](https://github.com/user-attachments/assets/d0520319-b0e9-488b-9be3-8c706ff2f1eb)
+![img_8](https://github.com/user-attachments/assets/80a98d2b-f865-4f5c-8c00-4b0c03bbcd05)
+![img_7](https://github.com/user-attachments/assets/7bc0321d-9349-481a-bade-cb59cc3bdeec)
+![img_6](https://github.com/user-attachments/assets/9514ff1e-540c-4ba6-aaaf-64b58c5a559d)
+![img_5](https://github.com/user-attachments/assets/9df25326-eb3d-464c-bf1e-41f38dbb51fc)
+![img_4](https://github.com/user-attachments/assets/47b44abe-8cee-4d0f-a77f-4a79d971b80e)
+![img_3](https://github.com/user-attachments/assets/c665f85b-2e2d-4cf5-ae89-b1b5d7ff91a3)
+![img_2](https://github.com/user-attachments/assets/5dfc4e53-d576-4727-bf8a-c7082438deff)
+![img_1](https://github.com/user-attachments/assets/bb793389-a3b2-46e9-b352-f51d05b2b231)
+![img](https://github.com/user-attachments/assets/cf6c0ea9-c679-495d-892a-ec679dfd6fe7)
