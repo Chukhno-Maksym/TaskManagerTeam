@@ -69,7 +69,7 @@ Create a .env file in the project's root directory and add the following:
 ### You can load base data into the database from a fixture using the following command:
     python manage.py loaddata initial_data.json
 
-### You cat use a test user to see the features.
+### You can use a test user to see the features.
 * login: testuser
 * password: 1qazcde3
 
