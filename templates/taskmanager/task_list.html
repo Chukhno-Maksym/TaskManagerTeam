@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% block sidebar %}
+    {% include "includes/nav-sidebar.html" %}
+  {% endblock %}
+
+  <section class="section-content">
+    <div class="page-content">
+      <div class="task-content">
+        {% for task in tasks %}
+          <div class="task-card {% if task.is_completed %}completed{% else %}pending{% endif %}">
+
+            <div class="task-header">
+              <h2>{{ task.name }}</h2>
+              <a href="{% url 'taskmanager:task_detail' pk=task.pk %}" class="details-link">Details</a>
+            </div>
+
+            <div class="task-deadline">
+              <strong>Deadline:</strong> {{ task.deadline }}
+            </div>
+
+            <div class="task-actions">
+              {% if task.is_completed %}
+                <form method="POST" action="{% url 'taskmanager:task_undo' pk=task.pk %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn incomplete-btn">Mark as Incomplete</button>
+                </form>
+              {% else %}
+                <form method="POST" action="{% url 'taskmanager:task_complete' pk=task.pk %}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn complete-btn">Mark as Complete</button>
+                </form>
+              {% endif %}
+            </div>
+          </div>
+        {% empty %}
+          <p class="no-tasks">No tasks available.</p>
+        {% endfor %}
+      </div>
+
+      {% block search_bar %}
+          {% include "includes/search_bar.html" %}
+      {% endblock %}
+    </div>
+  </section>
+{% endblock %}

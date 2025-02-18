@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="layout-container">
+    <div class="content-area">
+      <h1 class="page-title">Create User</h1>
+
+      <form action="" method="POST" class="user-form" novalidate>
+        {% csrf_token %}
+
+        <div class="form-group">
+          {{ form.as_p }}
+        </div>
+
+        <input type="submit" value="Create User" class="btn submit-btn">
+      </form>
+
+    </div>
+  </section>
+{% endblock %}

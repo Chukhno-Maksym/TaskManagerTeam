@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <section class="layout-container">
+    <div class="content-area">
+      <h1 class="page-title">Update User</h1>
+
+      <form action="" method="post" class="user-form">
+        {% csrf_token %}
+        <div class="form-group">
+          {{ form.as_p }}
+        </div>
+        <input type="submit" class="btn submit-btn" value="Submit">
+      </form>
+      <a href="{% url 'taskmanager:user_info' %}">
+        <button class="btn submit-btn cancel">Cancel</button>
+      </a>
+    </div>
+  </section>
+{% endblock %}

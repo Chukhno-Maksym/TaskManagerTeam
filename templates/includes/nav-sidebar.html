@@ -1,0 +1,38 @@
+<nav class="sidebar-normal">
+  <div class="user-info-container">
+    <h1>{{ user.username }}</h1>
+    <p>{{ user.position.name }}</p>
+    <p>{{ user.team.name }}</p>
+  </div>
+  <div class="sidebar-links">
+    <ul>
+      <li>
+        <a href="{% url "taskmanager:create_task" %}">
+          <button class="button nav-button">Create task</button>
+        </a>
+      </li>
+      <li>
+        <a href="{% url "taskmanager:tasks" %}">
+          <button class="button nav-button">All tasks</button>
+        </a>
+      </li>
+      <li>
+        <a href="{% url "taskmanager:tasks" %}?assigned_to=me">
+          <button class="button nav-button">My tasks</button>
+        </a>
+      </li>
+      <li>
+        <a href="{% url 'taskmanager:user_info' %}">
+          <button class="button nav-button">Personal information</button>
+        </a>
+      </li>
+      <li>
+        <form method="POST" action="{% url 'logout' %}">
+          {% csrf_token %}
+          <button class="button nav-button" type="submit">Log Out</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+</nav>
+
